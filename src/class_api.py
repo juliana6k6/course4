@@ -5,9 +5,16 @@ import json
 
 
 class API(ABC):
+    """
+    Абстрактный класс для работы с вакансиями
+    """
+    all_vacancies = []
 
     @abstractmethod
     def __init__(self):
+        """
+        Абстрактный метод для инициализации API запросов
+        """
         pass
 
     @abstractmethod
