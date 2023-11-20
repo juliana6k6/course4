@@ -131,8 +131,8 @@ class SuperJob_API(API):
             url = vacancy['link']
             salary_from = vacancy['payment_from']
             salary_to = vacancy['payment_to']
-            if vacancy['snippet']['requirement']:
-                requirement = vacancy['snippet']['requirement']
+            if vacancy["experience"]["title"]:
+                requirement = vacancy["experience"]["title"]
             else:
                 requirement = None
             vacancies_sj.append(Vacancy(name, url, salary_from, salary_to, requirement))
