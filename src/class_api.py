@@ -74,7 +74,12 @@ class HeadHunter_API(API):
             else:
                 salary_from = None
                 salary_to = None
-            vacancies_hh.append(Vacancy(name, url, salary_from, salary_to))
+            if vacancy['snippet']['requirement']:
+                requirement = vacancy['snippet']['requirement']
+            else:
+                requirement = None
+
+            vacancies_hh.append(Vacancy(name, url, salary_from, salary_to, requirement))
         return vacancies_hh
 
     # def change_date(self):
@@ -126,7 +131,11 @@ class SuperJob_API(API):
             url = vacancy['link']
             salary_from = vacancy['payment_from']
             salary_to = vacancy['payment_to']
-            vacancies_sj.append(Vacancy(name, url, salary_from, salary_to))
+            if vacancy['snippet']['requirement']:
+                requirement = vacancy['snippet']['requirement']
+            else:
+                requirement = None
+            vacancies_sj.append(Vacancy(name, url, salary_from, salary_to, requirement))
         return vacancies_sj
     # def change_date(self):
     #     pass

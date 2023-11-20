@@ -4,18 +4,21 @@ class Vacancy:
     Для работы с вакансиями
     """
 
-    def __init__(self, title, url, salary_from, salary_to):
+    def __init__(self, title, url, salary_from, salary_to, requirement):
         self.title = title
         self.url = url
         self.salary_from = salary_from
         self.salary_to = salary_to
+        self.requirement = requirement
+
 
     def __repr__(self):
         return f""" ------------
     Название: {self.title},
     Ссылка: {self.url},
     Минимальная зарплата: {self.salary_from},
-    Максимальная зарплата: {self.salary_to}
+    Максимальная зарплата: {self.salary_to},
+    Требования: {self.requirement}
     """
 #     def __init__(self, title: str, url: str, salary_from: int, salary_to: int, employer, requirements: str, area: str,
 #                  data_published: str, currency: str):
