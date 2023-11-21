@@ -41,12 +41,12 @@ class UserInput:
             hh_info = self.sj_api.get_vacancies(hh_response)
             list_of_vacancies.extend(hh_info)
         if int(user_input) == 2:
-            search_word = input("Введите поисковое слово")
+            search_word = input("Введите поисковое слово\n")
             sj_response = self.sj_api.get_requests(search_word)
             sj_info = self.sj_api.get_vacancies(sj_response)
             list_of_vacancies.extend(sj_info)
         if int(user_input) == 3:
-            search_word = input("Введите поисковое слово")
+            search_word = input("Введите поисковое слово\n")
             hh_response = self.hh_api.get_requests(search_word)
             sj_response = self.sj_api.get_requests(search_word)
             hh_info = self.sj_api.get_vacancies(hh_response)
@@ -60,7 +60,7 @@ class UserInput:
         """
         Выводит краткую информацию о вакансиях
         """
-        number = input("Ведите количество вакансий, которое хотите посмотреть")
+        number = input("Ведите количество вакансий, которое хотите посмотреть\n")
         print("Найдена следующая информация о вакансиях")
         for item in list_of_vacancies[:int(number)]:
             print(item)
