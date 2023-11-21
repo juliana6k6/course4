@@ -1,4 +1,5 @@
 from src.class_api import HeadHunter_API, SuperJob_API
+from src.class_saver import JSONSaver
 from src.class_my_list import My_List
 import copy
 
@@ -11,8 +12,8 @@ class UserInput:
     def __init__(self):
         self.hh_api = HeadHunter_API()
         self.sj_api = SuperJob_API()
-        self.all_list = My_List()
-        self.favorite_list = My_List()
+       # self.all_list = My_List()
+       # self.favorite_list = My_List()
         self.param = copy.deepcopy(self.param_zero)
 
 
@@ -60,8 +61,38 @@ class UserInput:
             Выводит краткую информацию о вакансиях
             """
             print("Найдена следующая информация о вакансиях")
-            for item in list_of_vacancies:
+            for item in list_of_vacanсies:
                 print(item)
+
+        def sort_vacancies_by_salary(self, list_of_vacancies):
+            """
+            Сортирует вакансии по зарплате
+            """
+            print("""Хотите ли отсортировать вакансии по зарплате?
+            Если да, нажмите 1. Если нет, нажмите 2""")
+            user_variant = input()
+            if user_variant == 1:
+                filtered_data = list_of_vacancies.sort(reverse=True)
+                for item in list_of_vacanсies:
+                    print(item)
+                print("Информация по вакансиям сохранена в файл")
+                JSONSaver.save_vacancies(filtered_data)
+                print("Выведим информацию по топ 5 вакансий")
+                top_5_vacancies = filtered_data[:5]
+                for item in list_of_vacanсies:
+                    print(item)
+
+
+
+            else:
+                print("Приходите в другой раз")
+
+
+
+
+
+
+
 
 
 

@@ -22,28 +22,27 @@ class Saver(ABC):
             pass
 
 
+class JSONSaver(Vacancies, Saver):
+    """Класс для обработки списка вакансий в JSON формате"""
 
-    class JSONSaver(Vacancies, Saver):
-        """Класс для обработки списка вакансий в JSON формате"""
+    def save_vacancies(self, vacant_information):
+        """
+        Сохраняет список вакансий в формате JSON
+        """
+        with open('vacancies.json', 'w', encoding="utf-8") as file:
+            json.dump(vacant_information, file, indent=4)
 
-        def save_vacancies(self):
-            """
-            Сохраняет список вакансий в формате JSON
-            """
-            with open('vacancies.json', 'w', encoding="utf-8") as file:
-                json.dump(self.all_vacancies, file, indent=4)
+    def read_vacancies(self):
+        with open('vacancies.json', 'r') as file:
+            list_vac = json.load(file)
+        self.all_vacancies = []
+        for vac in list_vac:
+            self.all_vacancies.append(Vacancy.to_dict_vacancy(vac))
 
-        def read_vacancies(self):
-            with open('vacancies.json', 'r') as file:
-                list_vac = json.load(file)
-            self.all_vacancies = []
-            for vac in list_vac:
-                self.all_vacancies.append(Vacancy.to_dict_vacancy(vac))
-
-        def delete_file(self):
-            """Удаляет файл"""
-            if os.path.exists('vacancies.json'):
-                os.remove('vacancies.json')
+    def delete_file(self):
+        """Удаляет файл"""
+        if os.path.exists('vacancies.json'):
+            os.remove('vacancies.json')
 
 
 
