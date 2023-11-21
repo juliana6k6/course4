@@ -73,23 +73,26 @@ class Vacancy:
 #                f'З/п до {self.salary} RUR\n' \
 #                f'Требования - {self.requirement}\n'
 #
-#     # def __eq__(self, other):
-#     #     return self.salary == other.salary
-#     #
-#     # def __ne__(self, other):
-#     #     return self.salary != other.salary
-#     #
-#     # def __lt__(self, other):
-#     #     return self.salary < other.salary
-#     #
-#     # def __le__(self, other):
-#     #     return self.salary <= other.salary
-#     #
-#     # def __gt__(self, other):
-#     #     return self.salary > other.salary
-#     #
-#     # def __ge__(self, other):
-#     #     return self.salary >= other.salary
+    def __eq__(self, other):
+        return self.salary == other.salary
+
+    def __ne__(self, other):
+        return self.salary != other.salary
+
+    def __lt__(self, other):
+        return self.salary < other.salary
+
+    def __le__(self, other):
+        return self.salary <= other.salary
+
+    def __gt__(self, other):
+        return self.salary > other.salary
+
+    def __ge__(self, other):
+        return self.salary >= other.salary
+
+    def get_salary_medium(self):
+        salary_medium = (self.salary_from + self.salary_to)/2
 #
 #     @classmethod
 #     def get_from_headhunter(cls, vacancy_info_hh: dict):
