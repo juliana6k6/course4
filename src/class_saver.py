@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from src.vacancies import Vacancies
 from src.class_vacancy import Vacancy
 import json
-import os
+
 
 
 class Saver(ABC):
@@ -39,10 +39,10 @@ class JSONSaver(Vacancies, Saver):
         for vac in list_vac:
             self.all_vacancies.append(Vacancy.to_dict_vacancy(vac))
 
-    def delete_file(self):
-        """Удаляет файл"""
-        if os.path.exists('vacancies.json'):
-            os.remove('vacancies.json')
+    # def delete_file(self):
+    #     """Удаляет файл"""
+    #     if os.path.exists('vacancies.json'):
+    #         os.remove('vacancies.json')
 
 
 

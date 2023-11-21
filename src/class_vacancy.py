@@ -7,8 +7,8 @@ class Vacancy:
     def __init__(self, title, url, salary_from, salary_to, requirement):
         self.title = title
         self.url = url
-        self.salary_from = salary_from
-        self.salary_to = salary_to
+        self.salary_from = salary_from if salary_from else 0
+        self.salary_to = salary_to if salary_to else 0
         self.requirement = requirement
 
         self.salary = (self.salary_from + self.salary_to)/2

@@ -16,11 +16,11 @@ class API(ABC):
         pass
 
     @abstractmethod
-    def get_requests(self):
+    def get_requests(self, keyword):
         pass
 
     @abstractmethod
-    def get_vacancies(self):
+    def get_vacancies(self, response):
         pass
 
 
@@ -57,12 +57,13 @@ class HeadHunter_API(API):
     def __init__(self):
         self.params = copy.deepcopy(self.param_zero)
 
-    def get_requests(self):
+    def get_requests(self, keyword):
+        self.params["text"] = keyword
         response_hh = requests.get(self.HH_API_URI, self.params)
         return response_hh
 
     def get_vacancies(self, response_hh):
-        info_hh = json.loads(response_hh.text)["items"]
+        info_hh = response_hh.json()["items"]
 
         vacancies_hh = []
         for vacancy in info_hh:
@@ -109,7 +110,8 @@ class SuperJob_API(API):
     def __init__(self):
         self.params = copy.deepcopy(self.param_zero)
 
-    def get_requests(self):
+    def get_requests(self, keyword):
+        self.params["keyword"] = keyword
         headers = {
             "X-Api-App-Id":
                 "v3.h.4556608.87bd54522b1c94b1a04a7a21a39251e19db2d567.d72e3df5ea2b2d980214c36977d0eaa2143378c7"}
@@ -123,7 +125,7 @@ class SuperJob_API(API):
         return response_sj
 
     def get_vacancies(self, response_sj):
-        info_sj = json.loads(response_sj.text)['objects']
+        info_sj = response_sj.json()['objects']
 
         vacancies_sj = []
         for vacancy in info_sj:
