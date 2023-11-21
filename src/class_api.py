@@ -86,7 +86,7 @@ class SuperJob_API(API):
 
         vacancies_sj = []
         for vacancy in info_sj:
-            name = vacancy['profession']
+            title = vacancy['profession']
             url = vacancy['link']
             salary_from = vacancy['payment_from']
             salary_to = vacancy['payment_to']
@@ -94,5 +94,5 @@ class SuperJob_API(API):
                 requirement = vacancy['experience']['title']
             else:
                 requirement = None
-            vacancies_sj.append(Vacancy(name, url, salary_from, salary_to, requirement))
+            vacancies_sj.append(Vacancy(title, url, salary_from, salary_to, requirement))
         return vacancies_sj

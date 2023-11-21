@@ -60,9 +60,10 @@ class UserInput:
         """
         Выводит краткую информацию о вакансиях
         """
-        number = input("Ведите количество вакансий, которое хотите посмотреть\n")
+        number = int(input("Ведите количество вакансий, которое хотите посмотреть\n"))
         print("Найдена следующая информация о вакансиях")
-        for item in list_of_vacancies[:int(number)]:
+        vac_list = list_of_vacancies[:number]
+        for item in vac_list:
             print(item)
 
     @staticmethod
