@@ -11,6 +11,13 @@ class Vacancy:
         self.salary_to = salary_to
         self.requirement = requirement
 
+        self.salary = (self.salary_from + self.salary_to)/2
+
+    def __str__(self):
+        """Возвращаем метод str для отображения"""
+        return (f"{self.__class__.__name__}('Професия: {self.title}', 'Ссылка: {self.url}',"
+                f" 'Зарплата: {self.salary}', 'Опыт: {self.requirement}')")
+
 
     def __repr__(self):
         return f""" ------------
@@ -18,7 +25,7 @@ class Vacancy:
     Ссылка: {self.url},
     Минимальная зарплата: {self.salary_from},
     Максимальная зарплата: {self.salary_to},
-    Требования: {self.requirement}
+    Опыт: {self.requirement}
     """
 #     def __init__(self, title: str, url: str, salary_from: int, salary_to: int, employer, requirements: str, area: str,
 #                  data_published: str, currency: str):
@@ -73,6 +80,7 @@ class Vacancy:
 #                f'З/п до {self.salary} RUR\n' \
 #                f'Требования - {self.requirement}\n'
 #
+
     def __eq__(self, other):
         return self.salary == other.salary
 
@@ -91,8 +99,21 @@ class Vacancy:
     def __ge__(self, other):
         return self.salary >= other.salary
 
-    def get_salary_medium(self):
-        salary_medium = (self.salary_from + self.salary_to)/2
+    def to_dict_vacancy(self):
+        """
+        Функция представляющая вакансию в виде словаря
+        """
+        return {
+            "title": self.title,
+            "url": self.url,
+            "salary_from": self.salary_from,
+            "salary_to": self.salary_to,
+            "requirements": self.requirement
+        }
+
+
+
+
 #
 #     @classmethod
 #     def get_from_headhunter(cls, vacancy_info_hh: dict):

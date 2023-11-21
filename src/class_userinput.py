@@ -18,27 +18,59 @@ class UserInput:
 
     def __call__(self):
         pass
-    #
-    #  def start_communication(self):
-    #     print("Добрый день, как Вас зовут?")
-    #     user_name = input().title()
-    #     print(
-    #         f"{user_name}, рад Вас видеть. \nВы готовы ознакомится с вакансиями? \nEсли да, то введите '+' либо 'enter'. \nEсли нет, введите '-'. ")
-    #     user_answer = input()
-    #     if user_answer == "+":
-    #         print("Приступим.")
-    #     elif user_answer == "-":
-    #         print('Приходите в следующий раз')
-    #
-    #
-    #     print("\nГде вы хотите искать вакансии \n1 - HeadHunter, \n2 - SuperJob")
-    #     user_input = input()
-    #     if int(user_input) == 1:
-    #         search = Search(input("Какой язык искать: "), "HeadHunter")
-    #
-    #     elif int(user_input) == 2:
-    #         search = Search(input("Какой язык искать: "), "SuperJob")
-    #
+
+    def start_communication_with_user(self):
+         print("Добрый день, как Вас зовут?")
+         user_name = input().title()
+         print("""{user_name}, рад Вас видеть.\nХотите ознакомится со списком вакансий?\n
+         Eсли да, то введите '+' либо 'enter'. Eсли нет, введите '-'.""")
+         user_answer = input()
+         if user_answer == "+":
+            print("Приступим.")
+         elif user_answer == "-":
+            print('Приходите в следующий раз')
+            print("\nГде вы хотите искать вакансии \n1 - HeadHunter \n2 - SuperJob \n 3 - HeadHunter и SuperJob")
+            user_input = int(input())
+            return user_name, user_input
+
+    def form_list_of_vacancies(self, user_input):
+        list_of_vacancies = []
+         if int(user_input) == 1:
+            search_word = input("Введите поисковое слово")
+            hh_response = self.hh_api.get_requests()
+            hh_info = self.sj_api.get_vacancies(hh_response)
+            list_of_vacancies.append(hh_info)
+         if int(user_input) == 2:
+            search_word = input("Введите поисковое слово")
+            sj_response = self.sj_api.get_requests
+            sj_info = self.sj_api.get_vacancies(sj_response)
+            list_vacancies = sj_info
+            list_of_vacancies.append(sj_info)
+         if int(user_input) == 3:
+            search_word = input("Введите поисковое слово")
+            hh_response = self.hh_api.get_requests()
+            sj_response = self.sj_api.get_requests()
+            hh_info = self.sj_api.get_vacancies(hh_response)
+            sj_info = self.sj_api.get_vacancies(sj_response)
+            list_of_vacancies.append(hh_info)
+            list_of_vacancies.append(sj_info)
+            return list_of_vacancies
+        def print_vacancies(self, list_of_vacancies):
+            """
+            Выводит краткую информацию о вакансиях
+            """
+            print("Найдена следующая информация о вакансиях")
+            for item in list_of_vacancies:
+                print(item)
+
+
+
+
+
+
+
+
+
     #     if search.HeadHunter_or_SuperJob() == "HeadHunter":
     #         data = search.head_hunter()
     #         y = 0

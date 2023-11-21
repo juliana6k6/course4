@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
+from src.vacancies import Vacancies
+from src.class_vacancy import Vacancy
 import json
+import os
 
 
 class Saver(ABC):
@@ -10,8 +13,15 @@ class Saver(ABC):
         def save_vacancies(self):
             pass
 
+        @abstractmethod
         def read_vacancies(self):
             pass
+
+        @abstractmethod
+        def delete_file(self):
+            pass
+
+
 
     class JSONSaver(Vacancies, Saver):
         """Класс для обработки списка вакансий в JSON формате"""
@@ -21,42 +31,20 @@ class Saver(ABC):
             Сохраняет список вакансий в формате JSON
             """
             with open('vacancies.json', 'w', encoding="utf-8") as file:
-                json.dump(cls.all_vacancies, file, indent=4)
+                json.dump(self.all_vacancies, file, indent=4)
 
-    ???    def read_vacancies(self):
+        def read_vacancies(self):
             with open('vacancies.json', 'r') as file:
-                list_dict = json.load(file)
-            self.__all_vacancies = []
-            for i in list_dict:
-                self.all_vacancies.append(Vacancy.from_dict(i))
+                list_vac = json.load(file)
+            self.all_vacancies = []
+            for vac in list_vac:
+                self.all_vacancies.append(Vacancy.to_dict_vacancy(vac))
+
+        def delete_file(self):
+            """Удаляет файл"""
+            if os.path.exists('vacancies.json'):
+                os.remove('vacancies.json')
 
 
 
 
-class TXT_Saver(Vacancies, Saver):
-    def save_vacancies(self):
-        """
-        Сохраняет список вакансий в формате TXT
-        """
-        with open('vacancies.txt', 'w', encoding="utf-8") as file:
-            for i in cls.all_vacancies:
-                file.write(f"{i['платформа']}\n"
-                           f"{i['должность']}\n"
-                           f"{i['зарплата_от']}\n"
-                           f"{i['описание']}\n"
-                           f"{i['ссылка']}\n\n")
-
-
-class CSV_Saver(Vacancies, Saver):
-
-    def save_vacancies(self):
-        """
-        Сохраняет список вакансий в формате CSV
-        """
-        with open('vacancies.scv', 'w', encoding="utf-8") as file:
-            names = ['платформа', 'должность', 'зарплата_от', 'описание', 'ссылка']
-            filewriter = csv.DictWriter(file, delimiter=",",
-                                         lineterminator="\r", fieldnames=names)
-            file_writer.writeheader()
-            for i in cls.all_vacansis:
-                file_writer.writerow(i)
