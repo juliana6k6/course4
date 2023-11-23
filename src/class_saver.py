@@ -13,9 +13,9 @@ class Saver(ABC):
 class JSONSaver(Saver):
     """Класс для обработки списка вакансий в JSON формате"""
 
-    def save_vacancies(self, information):
+    def save_vacancies(self, vacant_information):
         """
         Сохраняет список вакансий в формате JSON
         """
         with open('vacancies.json', 'w', encoding="utf-8") as file:
-            json.dump(information, file, indent=4)
+            json.dump(vacant_information, file, indent=4)

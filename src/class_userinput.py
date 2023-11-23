@@ -38,7 +38,7 @@ class UserInput:
         if int(user_input) == 1:
             search_word = input("Введите поисковое слово\n")
             hh_response = self.hh_api.get_requests(search_word)
-            hh_info = self.sj_api.get_vacancies(hh_response)
+            hh_info = self.hh_api.get_vacancies(hh_response)
             list_of_vacancies.extend(hh_info)
         if int(user_input) == 2:
             search_word = input("Введите поисковое слово\n")
@@ -49,11 +49,11 @@ class UserInput:
             search_word = input("Введите поисковое слово\n")
             hh_response = self.hh_api.get_requests(search_word)
             sj_response = self.sj_api.get_requests(search_word)
-            hh_info = self.sj_api.get_vacancies(hh_response)
+            hh_info = self.hh_api.get_vacancies(hh_response)
             sj_info = self.sj_api.get_vacancies(sj_response)
             list_of_vacancies.extend(hh_info)
             list_of_vacancies.extend(sj_info)
-            return list_of_vacancies
+        return list_of_vacancies
 
     @staticmethod
     def print_vacancies(list_of_vacancies):
@@ -79,7 +79,9 @@ class UserInput:
             for item in list_of_vacancies[:7]:
                 print(item)
             print("Информация по вакансиям сохранена в файл")
-            JSONSaver.save_vacancies(list_of_vacancies)
+            json_saver = JSONSaver()
+            list_dict_vacancies = [vacancy.to_dict_vacancy() for vacancy in list_of_vacancies]
+            json_saver.save_vacancies(list_dict_vacancies)
             print("Выведим информацию по топ 5 вакансий")
             top_5_vacancies = list_of_vacancies[:5]
             for item in top_5_vacancies:

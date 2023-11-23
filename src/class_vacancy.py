@@ -15,7 +15,7 @@ class Vacancy:
     def __str__(self):
         """Возвращаем метод str для отображения"""
         return (f"{self.__class__.__name__}('Профессия: {self.title}', 'Ссылка: {self.url}',"
-                f" 'Зарплата: {self.salary}', 'Опыт: {self.requirement}')")
+                f" 'Зарплата: {self.salary}'")
 
     def __repr__(self):
         return f""" ------------
